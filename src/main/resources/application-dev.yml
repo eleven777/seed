@@ -1,0 +1,51 @@
+server:
+  port: 7000
+  context-path: /
+  session:
+    cookie:
+      name: @project.build.finalName@
+  error:
+    include-stacktrace: always
+
+spring:
+  session:
+    store-type: hash_map
+  datasource:
+      driver-class-name: com.mysql.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/pms?useUnicode=true&characterEncoding=utf-8&useSSL=false&autoReconnect=true
+      username: root
+      password: 123
+      druid:
+        validation-query: SELECT 1
+        initial-size: 3
+        db-type: mysql
+        filters: stat,wall
+        web-stat-filter:
+          exclusions: /druid/*,*.js,*.gif,*.jpg,*.bmp,*.png,*.css,*.ico
+  freemarker:
+    prefix: /
+    suffix: .ftl
+    settings:
+      autoImport: spring.ftl as spring
+      numberFormat: "#"
+      datetimeFormat: yyyy-MM-dd HH:mm:ss
+      dateFormat: yyyy-MM-dd
+      timeFormat: HH:mm:ss
+      logTemplateExceptions: false
+      templateExceptionHandler: rethrow
+      templateUpdateDelay: 0
+    request-context-attribute: request
+
+logging:
+  config: classpath:logback-dev.xml
+
+
+
+
+
+
+
+
+
+
+

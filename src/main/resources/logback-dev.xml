@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <property name="dir" value="log"/>
+    <property name="pattern" value="%d %5p %t %c:%L - %m%n"/>
+    <property name="size" value="10mb"/>
+
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${pattern}</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="common" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder>
+            <pattern>${pattern}</pattern>
+        </encoder>
+        <file>${dir}/common.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${dir}/common-%d{yyyyMMddHH}.%i.log</fileNamePattern>
+            <maxFileSize>${size}</maxFileSize>
+        </rollingPolicy>
+    </appender>
+
+    <appender name="spring" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder>
+            <pattern>${pattern}</pattern>
+        </encoder>
+        <file>${dir}/spring.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${dir}/spring-%d{yyyyMMddHH}.%i.log</fileNamePattern>
+            <maxFileSize>${size}</maxFileSize>
+        </rollingPolicy>
+    </appender>
+
+    <appender name="mybatis" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder>
+            <pattern>${pattern}</pattern>
+        </encoder>
+        <file>${dir}/mybatis.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${dir}/mybatis-%d{yyyyMMddHH}.%i.log</fileNamePattern>
+            <maxFileSize>${size}</maxFileSize>
+        </rollingPolicy>
+    </appender>
+
+    <appender name="druid" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder>
+            <pattern>${pattern}</pattern>
+        </encoder>
+        <file>${dir}/druid.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${dir}/druid-%d{yyyyMMddHH}.%i.log</fileNamePattern>
+            <maxFileSize>${size}</maxFileSize>
+        </rollingPolicy>
+    </appender>
+
+    <appender name="freemarker" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder>
+            <pattern>${pattern}</pattern>
+        </encoder>
+        <file>${dir}/freemarker.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${dir}/freemarker-%d{yyyyMMddHH}.%i.log</fileNamePattern>
+            <maxFileSize>${size}</maxFileSize>
+        </rollingPolicy>
+    </appender>
+
+    <logger level="INFO" additivity="false" name="org.springframework">
+        <appender-ref ref="console"/>
+        <appender-ref ref="spring"/>
+    </logger>
+
+    <logger level="INFO" additivity="false" name="org.mybatis">
+        <appender-ref ref="console"/>
+        <appender-ref ref="mybatis"/>
+    </logger>
+
+    <logger level="INFO" additivity="false" name="com.alibaba.druid">
+        <appender-ref ref="console"/>
+        <appender-ref ref="druid"/>
+    </logger>
+
+    <logger level="INFO" additivity="false" name="freemarker">
+        <appender-ref ref="console"/>
+        <appender-ref ref="freemarker"/>
+    </logger>
+
+    <logger level="INFO" additivity="false" name="org.springframework.jdbc.core.JdbcTemplate">
+        <appender-ref ref="console"/>
+        <appender-ref ref="spring"/>
+    </logger>
+
+    <logger name="dao" level="DEBUG"/>
+
+    <root level="DEBUG">
+        <appender-ref ref="console"/>
+        <appender-ref ref="common"/>
+    </root>
+</configuration>
